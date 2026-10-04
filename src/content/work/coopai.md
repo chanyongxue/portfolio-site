@@ -14,6 +14,13 @@ cover: /images/work/coopai/coop-ai-banner.webp
 coverAlt: Coop AI banner
 coverWidth: 3144
 coverHeight: 1080
+metrics:
+  - value: 92%
+    label: positive feedback from Coop+ and Enterprise users
+    tags: [Customer feedback]
+  - value: 45–53%
+    label: feature adoption
+    tags: [Adoption]
 thumb: /images/work/coopai/coop-ai-thumbnail.webp
 order: 1
 ---

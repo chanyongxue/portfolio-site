@@ -59,6 +59,13 @@ const facts = [
             <li>
               <span class="value">{metric.value}</span>
               <span class="label">{metric.label}</span>
+              {metric.tags.length > 0 && (
+                <span class="tags mono">
+                  {metric.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </span>
+              )}
             </li>
           ))}
         </ul>

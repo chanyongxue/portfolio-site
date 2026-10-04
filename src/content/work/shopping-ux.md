@@ -14,6 +14,18 @@ coverAlt: Shopping UX banner
 coverWidth: 3144
 coverHeight: 1080
 metrics:
+  - value: 3x
+    label: growth in Coop+ premium subscriptions over two years
+    tags: [Revenue growth, Exceeded annual goal]
+  - value: +3%
+    label: above the 2025 B2C revenue goal
+    tags: [Revenue growth, Exceeded annual goal]
+  - value: +9.7%
+    label: B2C revenue, year over year
+    tags: [Revenue growth]
+  - value: −57%
+    label: customer support tickets, 2024 to 2025
+    tags: [Customer service, Exceeded expectations]
   - value: 90%
     label: less time to make a purchase
   - value: '< 5'

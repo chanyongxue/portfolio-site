@@ -80,16 +80,14 @@
     }
 
     // 3. Count metric numbers up from zero when they appear.
+    //    Every number in the value counts, so "+5.9%", "45–53%" and "15,000+" all work.
     document.querySelectorAll('.metrics .value, .stats .value').forEach((el) => {
-      const match = el.textContent.match(/^(\D*)(\d+)(.*)$/);
-      if (!match) return;
-      const final = el.textContent;
+      const final = el.textContent.trim();
+      if (!NUMBER.test(final)) return;
       const live = document.createElement('span');
       live.setAttribute('aria-hidden', 'true');
-      live.dataset.count = match[2];
-      live.dataset.prefix = match[1];
-      live.dataset.suffix = match[3];
-      live.textContent = `${match[1]}0${match[3]}`;
+      live.dataset.count = final;
+      live.textContent = countText(final, 0);
       const label = document.createElement('span');
       label.className = 'visually-hidden';
       label.textContent = final;
@@ -97,14 +95,27 @@
     });
   }
 
+  const NUMBER = /\d[\d,]*(?:\.\d+)?/;
+
+  // The value with each number scaled by `t` (0 to 1), keeping its decimals and thousands commas.
+  function countText(final, t) {
+    return final.replace(new RegExp(NUMBER.source, 'g'), (match) => {
+      const decimals = (match.split('.')[1] || '').length;
+      const scaled = Number(match.replace(/,/g, '')) * t;
+      return match.includes(',')
+        ? scaled.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+        : scaled.toFixed(decimals);
+    });
+  }
+
   function countUp(el) {
-    const end = Number(el.dataset.count);
+    const final = el.dataset.count;
     const start = performance.now();
-    const duration = 1100;
+    const duration = 1400;
     const frame = (now) => {
       const t = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - t, 4);
-      el.textContent = `${el.dataset.prefix}${Math.round(end * eased)}${el.dataset.suffix}`;
+      el.textContent = t < 1 ? countText(final, eased) : final;
       if (t < 1) requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);

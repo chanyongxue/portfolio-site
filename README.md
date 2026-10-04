@@ -32,9 +32,10 @@ blurb: For years, the Coop+ platform did not provide flexibility...   # one sent
 summary: Long time requested feature to shop more efficiently     # description for search and link previews
 lenses: [consumer]          # ai, consumer, enterprise: which lens pages list it
 tags: [Checkout, B2C]
-metrics:                    # optional, shown large above the cover
-  - value: 90%
-    label: less time to make a purchase
+metrics:                    # optional, shown large above the cover; the numbers count up on scroll
+  - value: +3%
+    label: above the 2025 B2C revenue goal
+    tags: [Revenue growth, Exceeded annual goal]   # optional pills under the label
 thumb: https://...          # card image; falls back to the cover
 order: 2                    # position in the grid
 draft: false                # true keeps it out of the site

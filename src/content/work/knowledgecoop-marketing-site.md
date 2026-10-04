@@ -14,6 +14,13 @@ cover: /images/work/knowledgecoop-marketing-site/marketing-site-banner.webp
 coverAlt: Knowledge Coop marketing site banner
 coverWidth: 3144
 coverHeight: 1080
+metrics:
+  - value: +5.9%
+    label: conversion rate above the 2025 goal
+    tags: [Conversion, Exceeded annual goal]
+  - value: +16.9%
+    label: conversion rate, year over year
+    tags: [Conversion]
 thumb: /images/work/knowledgecoop-marketing-site/marketing-site-thumbnail.webp
 order: 3
 ---

@@ -30,7 +30,13 @@ const work = defineCollection({
     coverAlt: z.string(),
     coverWidth: z.number().optional(),
     coverHeight: z.number().optional(),
-    metrics: z.array(z.object({ value: z.string(), label: z.string() })).default([]),
+    /**
+     * Result numbers shown under the project facts. The numbers count up when they scroll into view.
+     * `tags` are optional short pills under the label, for example the area and the outcome.
+     */
+    metrics: z
+      .array(z.object({ value: z.string(), label: z.string(), tags: z.array(z.string()).default([]) }))
+      .default([]),
     order: z.number(),
     /** Drafts are left out of the built site. */
     draft: z.boolean().default(false),
