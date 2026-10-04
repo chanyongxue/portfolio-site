@@ -1,0 +1,59 @@
+---
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/schibsted-grotesk';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/lenses';
+import { url, asset } from '../lib/url';
+import motion from '../scripts/motion.js?raw';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  current?: 'work';
+}
+
+const { title, description = site.description, image, current } = Astro.props;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name}, Product Designer`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+// The 404 page has no address of its own, so it gets no canonical link and stays out of search results.
+const isNotFound = Astro.url.pathname.replace(/\/$/, '').endsWith('/404');
+const ogImage = image ? new URL(asset(image), Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {isNotFound ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {!isNotFound && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip mono" href="#main">Skip to content</a>
+    <div class="wrap">
+      <Header current={current} />
+      <main id="main">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <script is:inline set:html={motion} />
+  </body>
+</html>

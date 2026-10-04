@@ -1,0 +1,16 @@
+---
+// One page per audience lens: /for/ai/, /for/consumer/, /for/enterprise/
+import Base from '../../layouts/Base.astro';
+import WorkIndex from '../../components/WorkIndex.astro';
+import { lenses } from '../../data/lenses';
+
+export function getStaticPaths() {
+  return lenses.map((lens) => ({ params: { lens: lens.id }, props: { lens } }));
+}
+
+const { lens } = Astro.props;
+---
+
+<Base title={lens.label} description={lens.description} current="work">
+  <WorkIndex lens={lens.id} />
+</Base>

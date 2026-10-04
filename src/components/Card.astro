@@ -1,0 +1,31 @@
+---
+// One project cell in the work grid. On hover or keyboard focus the image blurs and darkens
+// and the short description appears over it. On touch screens the description sits below the image.
+import { asset } from '../lib/url';
+
+interface Props {
+  href: string;
+  image?: string;
+  label: string;
+  chip?: string;
+  title: string;
+  blurb?: string;
+  eager?: boolean;
+}
+
+const { href, image, label, chip, title, blurb, eager = false } = Astro.props;
+---
+
+<a class="cell" href={href}>
+  <div class="cell-top mono">
+    <span>{label}</span>
+    {chip && <span>{chip}</span>}
+  </div>
+  <div class="media">
+    <div class="frame">
+      {image && <img src={asset(image)} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" />}
+    </div>
+    {blurb && <p class="blurb">{blurb}</p>}
+  </div>
+  <h3>{title}</h3>
+</a>

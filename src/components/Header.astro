@@ -1,0 +1,26 @@
+---
+import { site } from '../data/lenses';
+import { url } from '../lib/url';
+
+interface Props {
+  current?: 'work';
+}
+
+const { current } = Astro.props;
+const nav = [
+  { id: 'work', label: 'Work', href: url('/#work') },
+];
+---
+
+<header class="site-header">
+  <a class="site-name" href={url('/')}>{site.name}</a>
+  <nav class="site-nav mono" aria-label="Primary">
+    {
+      nav.map((item) => (
+        <a href={item.href} aria-current={item.id === current ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+</header>

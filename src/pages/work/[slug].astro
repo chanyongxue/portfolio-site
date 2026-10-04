@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import { contentHtml } from '../../lib/content-html';
+import Base from '../../layouts/Base.astro';
+import { lenses } from '../../data/lenses';
+import { url, asset } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+  return all.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: all[(i + 1) % all.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const { data } = project;
+const html = contentHtml(project);
+
+const lensLinks = lenses.filter((l) => data.lenses.includes(l.id));
+const facts = [
+  { term: 'Role', detail: data.role },
+  { term: 'Company', detail: data.company },
+  { term: 'Timeline', detail: data.timeline },
+  { term: 'Audience', detail: data.audience },
+  { term: 'Team', detail: data.team },
+  { term: 'Tools', detail: data.tools },
+  { term: 'Deliverables', detail: data.deliverables },
+].filter((fact) => fact.detail);
+---
+
+<Base title={data.title} description={data.blurb} image={data.cover} current="work">
+  <article>
+    <header class="case-head">
+      <nav class="crumbs mono" aria-label="Breadcrumb">
+        <a href={url('/#work')}>All work</a>
+        {lensLinks.map((l) => <a href={url(l.path)}>{l.label}</a>)}
+      </nav>
+      <p class="mono muted">{data.title}</p>
+      <h1 data-type>{data.headline}</h1>
+      {data.intro && <p class="intro">{data.intro}</p>}
+    </header>
+
+    <dl class="facts">
+      {
+        facts.map((fact) => (
+          <div>
+            <dt>{fact.term}</dt>
+            <dd>{fact.detail}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    {
+      data.metrics.length > 0 && (
+        <ul class="metrics">
+          {data.metrics.map((metric) => (
+            <li>
+              <span class="value">{metric.value}</span>
+              <span class="label">{metric.label}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <figure class="cover">
+      <img
+        src={asset(data.cover)}
+        alt={data.coverAlt}
+        width={data.coverWidth}
+        height={data.coverHeight}
+        fetchpriority="high"
+      />
+    </figure>
+
+    <div class="prose" set:html={html} />
+  </article>
+
+  <a class="next" href={url(`/work/${next.id}/`)}>
+    <span class="mono muted">Next project</span>
+    <span class="title">{next.data.title} <span class="arrow" aria-hidden="true">→</span></span>
+  </a>
+</Base>

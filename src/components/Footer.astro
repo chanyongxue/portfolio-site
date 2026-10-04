@@ -1,0 +1,11 @@
+---
+import { site } from '../data/lenses';
+---
+
+<footer class="site-footer" data-line>
+  <p class="cta">Open to a conversation.</p>
+  <div class="links mono">
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    {site.links.map((link) => <a href={link.href}>{link.label}</a>)}
+  </div>
+</footer>

@@ -1,0 +1,104 @@
+---
+// The home page and every lens page share this view: hero, lens tabs, project cards.
+import { getCollection } from 'astro:content';
+import Card from './Card.astro';
+import { lenses, site, type LensId } from '../data/lenses';
+import { url } from '../lib/url';
+
+interface Props {
+  lens?: LensId;
+}
+
+const { lens } = Astro.props;
+const all = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const active = lenses.find((l) => l.id === lens);
+
+// Every tab carries what the page needs to switch lens without reloading.
+const tabs = [
+  {
+    id: '',
+    label: 'All work',
+    href: url('/'),
+    count: all.length,
+    current: !lens,
+    intro: site.intro,
+    title: `${site.name}, Product Designer`,
+  },
+  ...lenses.map((l) => ({
+    id: l.id,
+    label: l.label,
+    href: url(l.path),
+    count: all.filter((p) => p.data.lenses.includes(l.id)).length,
+    current: l.id === lens,
+    intro: l.intro,
+    title: `${l.label} | ${site.name}`,
+  })),
+];
+---
+
+<section class="hero">
+  <!-- Soft white glow behind the headline. It follows the cursor (see src/scripts/motion.js). -->
+  <div class="glow" aria-hidden="true"><span class="glow-blob"></span></div>
+  <h1 data-type>{site.headline}</h1>
+  <div class="hero-foot">
+    <p class="intro">{active ? active.intro : site.intro}</p>
+    <ul class="stats">
+      {
+        site.stats.map((stat) => (
+          <li>
+            <span class="value">{stat.value}</span>
+            <span class="mono muted">{stat.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<section id="work" aria-labelledby="work-label">
+  <div class="work-head">
+    <h2 id="work-label">Recent work</h2>
+    <ul class="lens-tabs mono" aria-label="Filter by audience">
+      {
+        tabs.map((tab) => (
+          <li>
+            <a
+              href={`${tab.href}#work`}
+              data-lens={tab.id}
+              data-intro={tab.intro}
+              data-title={tab.title}
+              aria-current={tab.current ? 'page' : undefined}
+            >
+              <span>{tab.label}</span>
+              <span class="count">
+                {tab.count}
+                <span class="visually-hidden"> projects</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <p class="visually-hidden" role="status" data-lens-status></p>
+
+  <!-- All projects are in the page; the ones outside the current lens are hidden. -->
+  <ul class="cards">
+    {
+      all.map((project, i) => (
+        <li data-lenses={project.data.lenses.join(' ')} hidden={lens ? !project.data.lenses.includes(lens) : false}>
+          <Card
+            href={url(`/work/${project.id}/`)}
+            image={project.data.thumb ?? project.data.cover}
+            label={project.data.title}
+            chip={project.data.timeline ?? project.data.audience}
+            title={project.data.headline}
+            blurb={project.data.blurb}
+            eager={i < 3}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>
