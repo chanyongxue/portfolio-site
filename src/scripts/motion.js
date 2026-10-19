@@ -8,6 +8,24 @@
   let io = null;
   if (!animate) root.classList.remove('js');
 
+  // Sticky header: keep its backing clear at the top of the page, fill it in once scrolled.
+  const header = document.querySelector('.site-header');
+  if (header) {
+    let ticking = false;
+    const syncHeader = () => {
+      header.classList.toggle('is-top', scrollY < 4);
+      ticking = false;
+    };
+    addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) (ticking = true), requestAnimationFrame(syncHeader);
+      },
+      { passive: true },
+    );
+    syncHeader();
+  }
+
   // Keep this list in sync with the reveal selector in global.css.
   const REVEAL =
     '[data-reveal], .prose > *, .case-head > :not([data-type]), .facts, .metrics > li, .cover, .next, ' +
