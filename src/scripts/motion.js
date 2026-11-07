@@ -405,6 +405,17 @@
   }
 
 
+  // Escape hides the header tooltips until the pointer or focus moves on.
+  const contact = document.querySelector('.site-nav');
+  if (contact) {
+    addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') contact.classList.add('tips-off');
+    });
+    const reset = () => contact.classList.remove('tips-off');
+    contact.addEventListener('pointerleave', reset);
+    contact.addEventListener('focusout', reset);
+  }
+
   try {
     setupGlow();
   } catch (error) {

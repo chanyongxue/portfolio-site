@@ -219,6 +219,79 @@ p {
   outline-offset: 2px;
 }
 
+/* Tooltip under each pill. Shown on hover and keyboard focus; Escape hides it (motion.js). */
+.site-header .site-nav a {
+  position: relative;
+}
+
+.site-nav .tip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  z-index: 60;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--panel);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -4px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* Small arrow pointing up at the pill. */
+.site-nav .tip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-bottom-color: var(--ink);
+}
+
+/* Keep the end tooltips on screen: the first hangs right, the last hangs left. */
+.site-nav a:first-child .tip {
+  left: 0;
+  transform: translate(0, -4px);
+}
+
+.site-nav a:first-child .tip::before {
+  left: 18px;
+}
+
+.site-nav a:last-child .tip {
+  left: auto;
+  right: 0;
+  transform: translate(0, -4px);
+}
+
+.site-nav a:last-child .tip::before {
+  left: auto;
+  right: 18px;
+  margin-left: 0;
+  margin-right: -5px;
+}
+
+.site-nav:not(.tips-off) a:hover .tip,
+.site-nav:not(.tips-off) a:focus-visible .tip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.site-nav:not(.tips-off) a:first-child:hover .tip,
+.site-nav:not(.tips-off) a:first-child:focus-visible .tip,
+.site-nav:not(.tips-off) a:last-child:hover .tip,
+.site-nav:not(.tips-off) a:last-child:focus-visible .tip {
+  transform: none;
+}
+
 /* With no footer, leave room under the last section. */
 main {
   padding-bottom: clamp(56px, 8vw, 104px);
@@ -1113,6 +1186,7 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .site-nav .tip,
   .lens-indicator,
   .lens-tabs a,
   .lens-tabs a .count {

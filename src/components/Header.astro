@@ -2,13 +2,33 @@
 import { site } from '../data/lenses';
 import { url } from '../lib/url';
 
-// The contact links live in the header now (there is no footer).
-const nav = [{ label: 'Email', href: `mailto:${site.email}` }, ...site.links];
+// Contact links live in the header (there is no footer). Each pill has a tooltip underneath:
+// the email address for Email, and "Leaving portfolio" for links that open another site in a new tab.
+const nav = [
+  { label: 'Email', href: `mailto:${site.email}`, tip: site.email, external: false },
+  ...site.links.map((link) => ({ ...link, tip: 'Leaving portfolio', external: true })),
+];
 ---
 
 <header class="site-header">
   <a class="site-name" href={url('/')}>{site.name}</a>
   <nav class="site-nav mono" aria-label="Contact">
-    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    {
+      nav.map((item) => (
+        <a
+          href={item.href}
+          target={item.external ? '_blank' : undefined}
+          rel={item.external ? 'noopener noreferrer' : undefined}
+        >
+          {item.label}
+          {/* Stays in the accessibility tree (opacity, not visibility), so screen readers hear it with the link. */}
+          <span class="tip" role="tooltip">
+            <span class="visually-hidden">, </span>
+            {item.tip}
+            {item.external && <span class="visually-hidden"> (opens in a new tab)</span>}
+          </span>
+        </a>
+      ))
+    }
   </nav>
 </header>
