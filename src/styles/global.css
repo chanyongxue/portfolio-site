@@ -187,6 +187,9 @@ p {
 }
 
 .site-nav {
+  /* Above the header's divider line, so the tooltips are never crossed by it. */
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
