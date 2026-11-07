@@ -37,12 +37,9 @@ export const lenses: Lens[] = [
 
 export const site = {
   name: 'Courtney Chan',
-  headline: 'User-centric, data-driven design for AI, consumer and enterprise products.',
-  intro: 'Senior Product Designer at Knowledge Coop.',
-  stats: [
-    { value: '100+', label: 'Mortgage companies served' },
-    { value: '15,000+', label: 'Mortgage professionals served' },
-  ],
+  // <em> renders in light italic (see .hero h1 em in global.css).
+  headline: 'Transforming static views into <em>dynamic</em>, user-centric experiences.',
+  intro: '',
   description:
     'Courtney Chan is a Senior Product Designer at Knowledge Coop, designing user-centric and data-driven solutions.',
   email: 'courtneychan.design@gmail.com',

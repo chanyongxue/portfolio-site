@@ -274,11 +274,27 @@ p {
   will-change: transform;
 }
 
+/* With the script, the glow is drawn as ASCII characters instead of the blurred circle. */
+.glow.is-ascii .glow-blob {
+  display: none;
+}
+
+.glow-ascii {
+  position: absolute;
+  inset: 0;
+}
+
 .hero h1 {
   font-size: clamp(42px, 6.4vw, 92px);
   line-height: 1;
   letter-spacing: -0.025em;
   max-width: 17ch;
+}
+
+/* "dynamic" in the headline: light italic. */
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
 }
 
 .hero-foot {
@@ -292,6 +308,9 @@ p {
   flex: 1 1 320px;
   min-width: 0;
   max-width: 30ch;
+  margin: 0;
+  /* All lens intros share one cell, so the block is always as tall as the longest one. */
+  display: grid;
   font-family: var(--serif);
   font-size: clamp(22px, 2.2vw, 28px);
   line-height: 1.25;
@@ -324,6 +343,14 @@ p {
   letter-spacing: -0.03em;
 }
 
+.hero .intro > span {
+  grid-area: 1 / 1;
+}
+
+.hero .intro > span:not(.is-current) {
+  visibility: hidden;
+}
+
 /* Work section heading and lens tabs */
 .work-head {
   display: flex;
@@ -341,41 +368,97 @@ p {
 }
 
 .lens-tabs {
+  /* One connected, fully rounded track. The pill behind the current tab slides between tabs. */
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  max-width: 100%;
+  padding: 4px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.lens-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.lens-tabs ul {
+  display: flex;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.lens-tabs li {
+  flex: none;
+}
+
 .lens-tabs a {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-height: 44px;
-  padding: 8px 16px;
-  background: var(--panel);
-  border: 1px solid var(--rule);
+  padding: 8px 18px;
+  border-radius: 999px;
+  white-space: nowrap;
   text-decoration: none;
+  color: var(--ink);
+  transition: color 0.3s ease;
 }
 
 .lens-tabs a .count {
   color: var(--muted);
+  transition: color 0.3s ease;
 }
 
 .lens-tabs a:hover {
-  border: 1px solid var(--accent);
+  color: var(--accent);
 }
 
+.lens-tabs a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Without the script, the current tab carries its own fill. */
 .lens-tabs a[aria-current] {
   background: var(--ink);
-  border: 1px solid var(--ink);
+}
+
+.lens-tabs a[aria-current],
+.lens-tabs a[aria-current] .count {
   color: var(--panel);
 }
 
-.lens-tabs a[aria-current] .count {
-  color: var(--panel);
+/* With the script, the sliding pill is the fill instead. Only transform and width animate, so nothing reflows. */
+.lens-tabs.has-indicator a[aria-current] {
+  background: none;
+}
+
+.lens-indicator {
+  display: none;
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.75, 0.3, 1),
+    width 0.45s cubic-bezier(0.22, 0.75, 0.3, 1);
+}
+
+.lens-tabs.has-indicator .lens-indicator {
+  display: block;
+}
+
+.lens-indicator.no-anim {
+  transition: none;
 }
 
 /* Work grid: flush cells divided by hairlines */
@@ -897,7 +980,7 @@ p {
   }
 
   .lens-tabs a {
-    padding: 8px 12px;
+    padding: 8px 14px;
   }
 
   .facts > div {
@@ -1082,6 +1165,12 @@ p {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .lens-indicator,
+  .lens-tabs a,
+  .lens-tabs a .count {
+    transition: none;
+  }
+
   html {
     scroll-behavior: auto;
   }
