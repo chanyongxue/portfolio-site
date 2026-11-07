@@ -4,7 +4,6 @@ export interface Lens {
   id: LensId;
   label: string;
   path: string;
-  intro: string;
   description: string;
 }
 
@@ -14,23 +13,18 @@ export const lenses: Lens[] = [
     id: 'ai',
     label: 'AI products',
     path: '/for/ai/',
-    intro:
-      'AI features that give people time back: Coop AI for loan officers and underwriters, and Sortara, an AI list app for consumers.',
     description: 'AI product design work by Courtney Chan.',
   },
   {
     id: 'consumer',
     label: 'Consumer & mobile',
     path: '/for/consumer/',
-    intro:
-      'Mobile and web products for everyday users, from a faster checkout to new apps and brands built from the ground up.',
     description: 'Consumer and mobile product design work by Courtney Chan.',
   },
   {
     id: 'enterprise',
     label: 'Enterprise B2B',
     path: '/for/enterprise/',
-    intro: 'Tools for regulated work in the mortgage industry, where guidelines change and mistakes are costly.',
     description: 'Enterprise B2B product design work by Courtney Chan.',
   },
 ];
@@ -39,7 +33,6 @@ export const site = {
   name: 'Courtney Chan',
   // <em> renders in light italic (see .hero h1 em in global.css).
   headline: 'Transforming static views into <em>dynamic</em>, user-centric experiences.',
-  intro: '',
   description:
     'Courtney Chan is a Senior Product Designer at Knowledge Coop, designing user-centric and data-driven solutions.',
   email: 'courtneychan.design@gmail.com',

@@ -20,7 +20,6 @@ const tabs = [
     href: url('/'),
     count: all.length,
     current: !lens,
-    intro: site.intro,
     title: `${site.name}, Product Designer`,
   },
   ...lenses.map((l) => ({
@@ -29,7 +28,6 @@ const tabs = [
     href: url(l.path),
     count: all.filter((p) => p.data.lenses.includes(l.id)).length,
     current: l.id === lens,
-    intro: l.intro,
     title: `${l.label} | ${site.name}`,
   })),
 ];
@@ -39,17 +37,6 @@ const tabs = [
   <!-- Glow behind the headline, drawn as ASCII characters that follow the cursor (see src/scripts/motion.js). -->
   <div class="glow" aria-hidden="true"><span class="glow-blob"></span></div>
   <h1 data-type set:html={site.headline} />
-  <div class="hero-foot">
-    <!-- Every lens intro sits in the same grid cell, so the hero keeps the height of the longest one
-         and the tabs below never jump when you switch. Only the current one is visible. -->
-    <p class="intro">
-      {tabs.map((tab) => (
-        <span data-intro-for={tab.id} class:list={{ 'is-current': tab.current }}>
-          {tab.intro}
-        </span>
-      ))}
-    </p>
-  </div>
 </section>
 
 <section id="work" aria-labelledby="work-label">

@@ -29,7 +29,7 @@
   // Keep this list in sync with the reveal selector in global.css.
   const REVEAL =
     '[data-reveal], .prose > *, .case-head > :not([data-type]), .facts, .metrics > li, .cover, .next, ' +
-    '.hero-foot > *, .work-head, .cards > li, .site-footer > *, [data-line]';
+    '.hero-foot > *, .work-head, .cards > li, [data-line]';
 
   const stagger = (i) => `${Math.min(i, 6) * 70}ms`;
 
@@ -165,7 +165,6 @@
     const list = document.querySelector('.cards');
     if (!tabs.length || !list) return;
     const cards = [...list.children];
-    const intro = document.querySelector('.hero .intro');
     const status = document.querySelector('[data-lens-status]');
     let timer;
 
@@ -205,11 +204,6 @@
           card.hidden = !show;
           if (show) shown += 1;
         });
-        if (intro) {
-          intro.querySelectorAll('[data-intro-for]').forEach((el) => {
-            el.classList.toggle('is-current', el.dataset.introFor === tab.dataset.lens);
-          });
-        }
         document.title = tab.dataset.title;
         if (status) status.textContent = `Showing ${shown} ${shown === 1 ? 'project' : 'projects'}`;
       };
@@ -220,12 +214,12 @@
       }
 
       // Fade the current cards out, swap, then reveal the new set one after another.
-      const leaving = [list, intro].filter(Boolean);
+      const leaving = [list];
       leaving.forEach((el) => el.classList.add('is-leaving'));
       clearTimeout(timer);
       timer = setTimeout(() => {
         swap();
-        const fresh = [intro, ...cards.filter((card) => !card.hidden)].filter(Boolean);
+        const fresh = cards.filter((card) => !card.hidden);
         fresh.forEach((el) => {
           if (io) io.unobserve(el);
           el.classList.add('no-anim');
