@@ -877,8 +877,10 @@ main {
   margin: 12px 0 28px;
 }
 
-.prose figure img {
+.prose figure img,
+.prose figure video {
   width: 100%;
+  height: auto;
   background: var(--panel);
 }
 

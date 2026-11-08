@@ -405,6 +405,14 @@
   }
 
 
+  // Case study videos autoplay muted on loop; with reduced motion they wait for the play button.
+  if (reduce) {
+    document.querySelectorAll('.prose video[autoplay]').forEach((video) => {
+      video.removeAttribute('autoplay');
+      video.pause();
+    });
+  }
+
   // Escape hides the header tooltips until the pointer or focus moves on.
   const contact = document.querySelector('.site-nav');
   if (contact) {
