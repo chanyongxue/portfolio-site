@@ -53,7 +53,11 @@ With those considerations in mind, the end-user will view the following, but not
 
 The new UI/UX Design updates increased subscriptions immediately as it was an excellent selling point for potential clients. Previously, the UI was not scalable for when the list of collections grew.
 
-My first version launched to production as a single list of collections to pick from. As we added more options for custom collections, that list didn't scale, so I designed a nested menu and launched it as well. Collections group their files one level down, you can pin the ones you use most, and an info icon shows when each one was last updated.
+Before the rework, the start screen showed every collection as a card with its description. It was a lot of information, and reaching the bottom took a lot of scrolling. Users weren't reading the descriptions either, so that space wasn't serving them. I moved collection choice into a menu in the question box instead.
+
+<figure><video src="/images/work/coopai/collections-grid-to-menu.mp4" poster="/images/work/coopai/collections-grid-to-menu-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="The old start screen, a grid of collection cards with descriptions, scrolls and its descriptions fade back; the new start screen opens an Internal Collections menu, shows a collection's nested list and pins one"></video><figcaption>From a scrolling grid of collection cards to picking a collection from a menu.</figcaption></figure>
+
+My first version of the menu launched to production as a single list of collections to pick from. As we added more options for custom collections, that list didn't scale, so I designed a nested menu and launched it as well. Collections group their files one level down, you can pin the ones you use most, and an info icon shows when each one was last updated.
 
 <figure><video src="/images/work/coopai/collections-v1-to-v2.mp4" poster="/images/work/coopai/collections-v1-to-v2-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Version 1 of the collection picker, a radio list, steps aside for version 2: hovering a collection opens its nested list, a collection is pinned, and an info tooltip shows when it was last updated"></video><figcaption>From the launched radio list to the launched nested menu, with pinned collections and update dates.</figcaption></figure>
 
