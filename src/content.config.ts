@@ -41,6 +41,8 @@ const work = defineCollection({
     video: z
       .object({ src: z.string(), poster: z.string().optional(), alt: z.string(), caption: z.string().optional() })
       .optional(),
+    /** Set false to keep the cover for cards and sharing but leave it off the case study page (e.g. when a video leads instead). */
+    showCover: z.boolean().default(true),
     order: z.number(),
     /** Drafts are left out of the built site. */
     draft: z.boolean().default(false),

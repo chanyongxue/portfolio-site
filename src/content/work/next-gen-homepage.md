@@ -6,6 +6,7 @@ intro: In Knowledge Coop's legacy intranet, building a homepage was convoluted. 
 blurb: An Edit mode for the intranet homepage, with good design built in and changes held as drafts until you publish.
 role: Senior Product Designer
 company: Knowledge Coop
+timeline: Oct 2026
 audience: B2B
 lenses: [enterprise]
 tags: [Intranet, Editing, B2B]
@@ -14,6 +15,12 @@ coverAlt: Cards from the redesigned homepage editor on a purple background, show
 coverWidth: 1800
 coverHeight: 618
 thumb: /images/work/next-gen-homepage/next-gen-homepage-thumbnail.webp
+showCover: false
+video:
+  src: /images/work/next-gen-homepage/homepage-add.mp4
+  poster: /images/work/next-gen-homepage/homepage-add-poster.webp
+  alt: In Edit mode, the cursor moves across the four ways to add content (write a note, add from Library, upload new content and add a widget), then opens a section's Add menu with the same four options.
+  caption: Edit mode. Four ways to add content, available in every section.
 order: -1
 ---
 
@@ -31,15 +38,13 @@ The legacy homepage was built on the same logic as the Library: sections of fold
 
 Edit mode turns the homepage into the editor. Every section offers the same four ways to add content: write a note that lives only on the homepage, add something from the Library, upload new content, or add a widget that updates on its own. The Add menu sits inside each section, so you add things right where they'll appear instead of scrolling to the bottom. Good UI is built into every option, so admins never have to worry about how the page will look.
 
-<figure><video src="/images/work/next-gen-homepage/homepage-add.mp4" poster="/images/work/next-gen-homepage/homepage-add-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="In Edit mode, the cursor moves across the four ways to add content: write a note, add from Library, upload new content and add a widget. Then it opens a section's Add menu with the same four options."></video><figcaption>Four ways to add content, available in every section.</figcaption></figure>
-
 ---
 
 ## Emphasis, one item at a time
 
-In the legacy product, a section's settings applied to everything in it. In Edit mode, admins can set the emphasis of a single item. Hovering a card shows a small, medium or large display option, and each card can be shown as an embed or a link.
+In the legacy product, a section's settings applied to everything in it. In Edit mode, admins can set the emphasis of a single item. Hovering a card shows small, medium and large display options: medium spans two-thirds of the section and large spans its full width, with the other items reflowing around it. The card's Edit button opens its display options, so it can be shown as an embed or a link.
 
-<figure><video src="/images/work/next-gen-homepage/homepage-emphasis.mp4" poster="/images/work/next-gen-homepage/homepage-emphasis-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Hovering a card in Edit mode shows its toolbar. The cursor hovers small, medium and large display, each with a tooltip, then opens the card's options to display it as an embed or a link."></video><figcaption>Small, medium or large display, plus embed or link, set per item.</figcaption></figure>
+<figure><video src="/images/work/next-gen-homepage/homepage-emphasis.mp4" poster="/images/work/next-gen-homepage/homepage-emphasis-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Hovering a card in Edit mode shows its toolbar. Choosing medium widens the card to two-thirds of the section and the next card wraps below; choosing large widens it to the full section. Then the card's Edit button opens its options to display it as an embed or a link."></video><figcaption>Medium spans two-thirds of the section, large the full width. Edit opens the display options.</figcaption></figure>
 
 ---
 
