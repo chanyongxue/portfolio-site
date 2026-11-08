@@ -44,8 +44,6 @@ Hovering any avatar opens a profile preview card. It shows profile info only, ne
 
 <figure><video src="/images/work/avatar-stack/stack-hover.mp4" poster="/images/work/avatar-stack/stack-hover-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Hovering an avatar darkens the photo and opens a profile preview card for Maya Chen. Then hovering +17 opens a list of 17 more people online."></video><figcaption>Hover an avatar for a profile preview. Hover the count to see everyone else online.</figcaption></figure>
 
-<figure><img src="/images/work/avatar-stack/component.webp" alt="The Avatar · Presence component: default, same page with a purple focus ring, and hover, which darkens the photo and shows the profile preview card" width="2720" height="1280"><figcaption>Avatar · Presence. Same page adds the focus ring; hover darkens the photo and shows the profile preview card.</figcaption></figure>
-
 ---
 
 ## Presence rules
@@ -59,8 +57,6 @@ People come and go without anyone touching the page. Someone coming online is ad
 
 <figure><video src="/images/work/avatar-stack/stack-joinleave.mp4" poster="/images/work/avatar-stack/stack-joinleave-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Someone comes online: a new avatar scales in on the far left, the others glide right, the seventh slides into the count and it bumps from +17 to +18. Then someone goes offline: their avatar fades and shrinks, the rest glide left and a new person fills the end."></video><figcaption>Join and leave, live.</figcaption></figure>
 
-<figure><img src="/images/work/avatar-stack/spec-join-leave.webp" alt="Motion spec for joining and leaving: a new avatar fades and scales in on the far left while others glide right, then the seventh moves into the count; a leaving avatar fades and shrinks while the others glide left to close the gap" width="2622" height="694"><figcaption>Join and leave motion spec.</figcaption></figure>
-
 ---
 
 ## Motion that explains every change
@@ -73,5 +69,3 @@ A page change, or a switch between everyone online and the page-first view, runs
 - **In, 200ms+.** New avatars pop in, scaling from 0.6 to 1 over 420ms with a spring, 45ms apart.
 
 Avatars that don't change aren't re-rendered, so an open profile preview stays put. The page content fades up over 260ms. With reduced motion turned on, the stack swaps instantly.
-
-<figure><img src="/images/work/avatar-stack/spec-page-change.webp" alt="Motion spec for page changes: moving to a page others are on, and moving to a page nobody else is on, each in four stages from before to settled" width="3000" height="458"><figcaption>Page change motion spec, in both directions.</figcaption></figure>
