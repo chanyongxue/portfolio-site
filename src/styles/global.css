@@ -11,7 +11,8 @@
   --sans: 'Schibsted Grotesk Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --gutter: clamp(20px, 5vw, 56px);
-  --label-col: 200px;
+  --read-col: 680px;   /* case study text */
+  --media-col: 1080px; /* case study images and videos, wider than the text */
 }
 
 *,
@@ -655,6 +656,15 @@ main {
 }
 
 /* Case study */
+.case-head,
+.facts,
+.metrics,
+.next {
+  width: 100%;
+  max-width: var(--media-col);
+  margin-inline: auto;
+}
+
 .case-head {
   padding: clamp(40px, 6vw, 80px) 0 40px;
   display: flex;
@@ -697,7 +707,7 @@ main {
 }
 
 .facts {
-  margin: 0;
+  margin-block: 0;
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid var(--rule);
@@ -726,7 +736,7 @@ main {
 }
 
 .metrics {
-  margin: 0;
+  margin-block: 0;
   padding: 40px 0 16px;
   list-style: none;
   display: grid;
@@ -803,48 +813,43 @@ main {
   background: var(--bg);
 }
 
-/* Long-form content written in Markdown */
+/* Long-form content written in Markdown.
+   Text sits in one centred reading column (left-aligned); images and videos run wider, also centred. */
 .prose {
   padding: clamp(40px, 6vw, 72px) 0 0;
-  display: grid;
-  grid-template-columns: var(--label-col) minmax(0, 1fr);
-  column-gap: 32px;
   font-size: 18px;
   line-height: 1.55;
   color: var(--body);
 }
 
 .prose > * {
-  grid-column: 2;
-  margin: 0 0 20px;
-  max-width: 62ch;
+  max-width: var(--read-col);
+  margin: 0 auto 20px;
 }
 
 .prose > hr {
-  grid-column: 1 / -1;
-  max-width: none;
+  max-width: var(--media-col);
   width: 100%;
   border: 0;
   border-top: 1px solid var(--rule);
-  margin: clamp(32px, 5vw, 56px) 0;
+  margin: clamp(32px, 5vw, 56px) auto;
 }
 
 .prose > .kicker {
-  grid-column: 1;
   font-family: var(--mono);
   font-size: 12.5px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   line-height: 1.5;
   color: var(--muted);
-  padding-top: 12px;
+  margin-bottom: 8px;
 }
 
 .prose > h2 {
   font-size: clamp(30px, 3.4vw, 42px);
   line-height: 1.1;
   color: var(--ink);
-  max-width: 24ch;
+  text-wrap: balance;
 }
 
 .prose > h3 {
@@ -852,7 +857,7 @@ main {
   line-height: 1.18;
   color: var(--ink);
   margin-top: 12px;
-  max-width: 32ch;
+  text-wrap: balance;
 }
 
 .prose > h4 {
@@ -883,8 +888,12 @@ main {
 .prose > figure,
 .prose > .gallery,
 .prose > .embed {
-  max-width: none;
-  margin: 12px 0 28px;
+  max-width: var(--media-col);
+  margin: 16px auto 40px;
+}
+
+.prose .gallery figure {
+  margin: 0;
 }
 
 .prose figure img,
@@ -901,19 +910,22 @@ main {
   color: var(--muted);
 }
 
+/* Side-by-side images share one height: each item grows in proportion to its aspect ratio
+   (--ar, set from the image's width/height in content-html.ts), from a zero basis. */
 .prose .gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: flex;
   gap: 16px;
-  align-items: start;
+  align-items: flex-start;
 }
 
-.prose .gallery.tall {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+.prose .gallery > * {
+  flex: calc(var(--ar, 1)) 1 0;
+  min-width: 0;
 }
 
 .prose .gallery img {
   width: 100%;
+  height: auto;
   background: var(--panel);
 }
 
@@ -953,6 +965,7 @@ main {
 
 .next {
   margin-top: clamp(40px, 6vw, 72px);
+  margin-bottom: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -987,24 +1000,28 @@ main {
 
 }
 
-@media (max-width: 900px) {
-  .prose {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .prose > *,
-  .prose > .kicker {
-    grid-column: 1;
-  }
-
-  .prose > .kicker {
-    margin-bottom: 4px;
-    padding-top: 0;
-  }
-}
 
 /* Phone: one column */
 @media (max-width: 639px) {
+  .prose .gallery {
+    flex-direction: column;
+  }
+
+  .prose .gallery > * {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Phone screenshots stay two across */
+  .prose .gallery.tall {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .prose .gallery.tall > * {
+    width: calc(50% - 8px);
+  }
+
   body {
     font-size: 16px;
   }

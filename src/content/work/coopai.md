@@ -70,8 +70,3 @@ The new states also improve the buttons' metadata, so people using assistive tec
 
 <figure><img src="/images/work/coopai/new-components.webp" alt="New components and their states: send is active, inactive or timed out; the mic is active, available or unavailable" width="3144" height="1723"></figure>
 
----
-
-## A logo to match
-
-I also used my graphic design background to redesign the Coop AI logo, so the tool is recognizable wherever it's marketed across our other products.
