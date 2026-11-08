@@ -496,22 +496,19 @@ main {
   transition: none;
 }
 
-/* Work grid: flush cells divided by hairlines */
+/* Work grid: two columns of tiles. Hovering a tile lightens a rounded background behind it. */
 .cards {
-  margin: 0;
+  margin: 0 -16px;
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid var(--rule);
-  border-left: 1px solid var(--rule);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
 }
 
 .cards > li {
   display: flex;
   min-width: 0;
-  border-right: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
 }
 
 .cards > li[hidden] {
@@ -523,8 +520,9 @@ main {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 24px 24px 30px;
+  gap: 16px;
+  padding: 16px 16px 24px;
+  border-radius: 20px;
   color: var(--ink);
   text-decoration: none;
   transition: background 0.25s ease-out;
@@ -532,127 +530,49 @@ main {
 
 .cell:hover,
 .cell:focus-visible {
-  background: var(--panel);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--ink);
 }
 
 .cell:focus-visible {
-  outline-offset: -2px;
-}
-
-.cell-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--muted);
-}
-
-.cell .media {
-  position: relative;
+  outline-offset: 2px;
 }
 
 .cell .frame {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;   /* matches the demo videos, so nothing is cropped */
   overflow: hidden;
+  border-radius: 12px;
   background: var(--panel);
 }
 
-.cell .frame img {
+.cell .frame img,
+.cell .frame video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition:
-    filter 0.45s ease,
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* The dark wash that makes the description readable over any image. */
-.cell .frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(20, 20, 18, 0.74);
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-}
-
-.cell .blurb {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 22px;
-  color: #f4f3ee;
-  font-size: 16px;
-  line-height: 1.45;
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.25s ease-out,
-    transform 0.25s ease-out;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 7;
-  line-clamp: 7;
-  overflow: hidden;
-}
-
-.cell:hover .frame img,
-.cell:focus-visible .frame img {
-  filter: blur(8px);
-  transform: scale(1.08);
-}
-
-.cell:hover .frame::after,
-.cell:focus-visible .frame::after {
-  opacity: 1;
-}
-
-.cell:hover .blurb,
-.cell:focus-visible .blurb {
-  opacity: 1;
-  transform: none;
+  pointer-events: none;
 }
 
 .cell h3 {
+  margin-top: 6px;
   font-size: clamp(24px, 2.3vw, 32px);
-  line-height: 1.1;
+  line-height: 1.12;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
-/* Touch screens have no hover: show the description under the image instead. */
-@media (hover: none) {
-  .cell .media {
-    display: contents;
-  }
+.cell-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  color: var(--muted);
+}
 
-  .cell .frame {
-    order: 1;
-  }
-
-  .cell h3 {
-    order: 2;
-  }
-
-  .cell .blurb {
-    order: 3;
-    position: static;
-    margin-top: -8px;
-    padding: 0;
-    color: var(--muted);
-    opacity: 1;
-    transform: none;
-    display: block;
-  }
-
-  .cell .frame::after {
-    display: none;
-  }
-
-  .cell:hover .frame img,
-  .cell:focus-visible .frame img {
-    filter: none;
-    transform: none;
-  }
+.cell-meta span + span::before {
+  content: '·';
+  margin-right: 16px;
 }
 
 /* Case study */
@@ -993,12 +913,7 @@ main {
 }
 
 /* Tablet: two columns of cards, single-column case study text */
-@media (max-width: 1023px) {
-  .cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
-}
 
 
 /* Phone: one column */
@@ -1028,10 +943,11 @@ main {
 
   .cards {
     grid-template-columns: minmax(0, 1fr);
+    margin: 0 -12px;
   }
 
   .cell {
-    padding: 20px 18px 26px;
+    padding: 12px 12px 20px;
   }
 
   .site-header {

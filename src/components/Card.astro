@@ -1,31 +1,47 @@
 ---
-// One project cell in the work grid. On hover or keyboard focus the image blurs and darkens
-// and the short description appears over it. On touch screens the description sits below the image.
+// One project tile in the work grid: media, then the title, then the project name and date.
+// If the project has a video, it plays in the tile (muted, looping, no controls) instead of the image.
+// Hovering the tile lightens a rounded background behind it.
 import { asset } from '../lib/url';
 
 interface Props {
   href: string;
   image?: string;
+  video?: string;
+  poster?: string;
   label: string;
   chip?: string;
   title: string;
-  blurb?: string;
   eager?: boolean;
 }
 
-const { href, image, label, chip, title, blurb, eager = false } = Astro.props;
+const { href, image, video, poster, label, chip, title, eager = false } = Astro.props;
 ---
 
 <a class="cell" href={href}>
-  <div class="cell-top mono">
+  <div class="frame">
+    {
+      video ? (
+        <video
+          src={asset(video)}
+          poster={poster ? asset(poster) : image ? asset(image) : undefined}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          disablepictureinpicture
+          aria-hidden="true"
+          tabindex="-1"
+        />
+      ) : (
+        image && <img src={asset(image)} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+      )
+    }
+  </div>
+  <h3>{title}</h3>
+  <div class="cell-meta mono">
     <span>{label}</span>
     {chip && <span>{chip}</span>}
   </div>
-  <div class="media">
-    <div class="frame">
-      {image && <img src={asset(image)} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" />}
-    </div>
-    {blurb && <p class="blurb">{blurb}</p>}
-  </div>
-  <h3>{title}</h3>
 </a>

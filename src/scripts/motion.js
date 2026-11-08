@@ -413,6 +413,18 @@
     });
   }
 
+  // Tile videos on the work grid play only while on screen.
+  const tileVideos = [...document.querySelectorAll('.cards .frame video')];
+  if (tileVideos.length && 'IntersectionObserver' in window && !reduce) {
+    const vio = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) target.play().catch(() => {});
+        else target.pause();
+      });
+    }, { threshold: 0.25 });
+    tileVideos.forEach((v) => vio.observe(v));
+  }
+
   // Escape hides the header tooltips until the pointer or focus moves on.
   const contact = document.querySelector('.site-nav');
   if (contact) {

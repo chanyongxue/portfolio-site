@@ -78,11 +78,12 @@ const tabs = [
           <Card
             href={url(`/work/${project.id}/`)}
             image={project.data.thumb ?? project.data.cover}
+            video={project.data.thumbVideo ?? project.data.video?.src}
+            poster={project.data.thumbPoster ?? project.data.video?.poster}
             label={project.data.title}
             chip={project.data.timeline ?? project.data.audience}
             title={project.data.headline}
-            blurb={project.data.blurb}
-            eager={i < 3}
+            eager={i < 4}
           />
         </li>
       ))

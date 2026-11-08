@@ -15,6 +15,8 @@ coverAlt: Cards from the redesigned profile on a purple background, showing prof
 coverWidth: 1800
 coverHeight: 618
 thumb: /images/work/next-gen-profile/next-gen-profile-thumbnail.webp
+thumbVideo: /images/work/next-gen-profile/next-gen-profile-walkthrough.mp4
+thumbPoster: /images/work/next-gen-profile/next-gen-profile-walkthrough-poster.webp
 order: 0
 ---
 

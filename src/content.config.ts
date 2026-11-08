@@ -41,6 +41,9 @@ const work = defineCollection({
     video: z
       .object({ src: z.string(), poster: z.string().optional(), alt: z.string(), caption: z.string().optional() })
       .optional(),
+    /** Optional video for the homepage tile (plays muted on loop, no controls). Falls back to `video`, then the image. */
+    thumbVideo: z.string().optional(),
+    thumbPoster: z.string().optional(),
     /** Set false to keep the cover for cards and sharing but leave it off the case study page (e.g. when a video leads instead). */
     showCover: z.boolean().default(true),
     order: z.number(),
