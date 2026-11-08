@@ -53,6 +53,10 @@ With those considerations in mind, the end-user will view the following, but not
 
 The new UI/UX Design updates increased subscriptions immediately as it was an excellent selling point for potential clients. Previously, the UI was not scalable for when the list of collections grew.
 
+My first version launched to production as a single list of collections to pick from. As we added more options for custom collections, that list didn't scale, so I designed a nested menu and launched it as well. Collections group their files one level down, you can pin the ones you use most, and an info icon shows when each one was last updated.
+
+<figure><video src="/images/work/coopai/collections-v1-to-v2.mp4" poster="/images/work/coopai/collections-v1-to-v2-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Version 1 of the collection picker, a radio list, steps aside for version 2: hovering a collection opens its nested list, a collection is pinned, and an info tooltip shows when it was last updated"></video><figcaption>From the launched radio list to the launched nested menu, with pinned collections and update dates.</figcaption></figure>
+
 <figure><img src="/images/work/coopai/custom-collections_-before-and-after.webp" alt="Custom collections, before and after" width="3144" height="1723"></figure>
 
 ---
