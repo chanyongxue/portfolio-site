@@ -37,6 +37,10 @@ const work = defineCollection({
     metrics: z
       .array(z.object({ value: z.string(), label: z.string(), tags: z.array(z.string()).default([]) }))
       .default([]),
+    /** Optional video shown right under the result numbers (autoplays muted on loop, with controls). */
+    video: z
+      .object({ src: z.string(), poster: z.string().optional(), alt: z.string(), caption: z.string().optional() })
+      .optional(),
     order: z.number(),
     /** Drafts are left out of the built site. */
     draft: z.boolean().default(false),

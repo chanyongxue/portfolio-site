@@ -789,8 +789,18 @@ main {
   background: var(--panel);
 }
 
-.cover img {
+.cover img,
+.cover video {
   width: 100%;
+  height: auto;
+}
+
+.feature-video figcaption {
+  padding: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--muted);
+  background: var(--bg);
 }
 
 /* Long-form content written in Markdown */

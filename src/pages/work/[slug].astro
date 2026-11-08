@@ -72,6 +72,26 @@ const facts = [
       )
     }
 
+    {
+      data.video && (
+        <figure class="cover feature-video">
+          <video
+            src={asset(data.video.src)}
+            poster={data.video.poster && asset(data.video.poster)}
+            width="1920"
+            height="1080"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            aria-label={data.video.alt}
+          />
+          {data.video.caption && <figcaption>{data.video.caption}</figcaption>}
+        </figure>
+      )
+    }
+
     <figure class="cover">
       <img
         src={asset(data.cover)}

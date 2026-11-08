@@ -22,6 +22,11 @@ metrics:
     label: feature adoption
     tags: [Adoption]
 thumb: /images/work/coopai/coop-ai-thumbnail.webp
+video:
+  src: /images/work/coopai/coop-ai-chat-walkthrough.mp4
+  poster: /images/work/coopai/coop-ai-chat-walkthrough-poster.webp
+  alt: Walkthrough of Coop AI. On the start screen, Learn how to use Coop AI opens a guided walkthrough. A conversation builds up with answers citing their source documents, then the chat window narrows from desktop to mobile and both layouts sit side by side.
+  caption: Using Coop AI, with a guided walkthrough for users new to AI, from desktop to mobile.
 order: 1
 ---
 

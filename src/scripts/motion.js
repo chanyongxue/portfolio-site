@@ -407,7 +407,7 @@
 
   // Case study videos autoplay muted on loop; with reduced motion they wait for the play button.
   if (reduce) {
-    document.querySelectorAll('.prose video[autoplay]').forEach((video) => {
+    document.querySelectorAll('video[autoplay]').forEach((video) => {
       video.removeAttribute('autoplay');
       video.pause();
     });
