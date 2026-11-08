@@ -860,6 +860,20 @@ main {
   border: 0;
 }
 
+.prose > blockquote {
+  margin: 8px auto 28px;
+  padding: 4px 0 4px 24px;
+  border-left: 3px solid var(--accent);
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.prose > blockquote p {
+  margin: 0;
+}
+
 .prose .note {
   font-size: 15px;
   color: var(--muted);
