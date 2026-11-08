@@ -33,6 +33,24 @@ At a Pre-Rift event, you open packs on the spot and build a 25-card deck from wh
 
 I wasn't alone. Plenty of people come to Riftbound from League of Legends, not from other card games, and they hit the same wall.
 
+The tools that existed didn't help. The official deck builder at riftbound.gg wasn't user friendly, let alone beginner friendly. Every rule and requirement sits nested in a panel on the right instead of built into the experience, so you build blind and then check a list of what's wrong. It also only considered Constructed play, with a 56-card main deck from any cards you own, not Pre-Rift play, where you build 25 cards from only what you opened.
+
+---
+
+## Pool and deck, side by side
+
+I built the experience around the two things a Pre-Rift player actually juggles: the Pool, every card you got from ripping packs, and the Deck you build from it. You can search by name or card number, filter by color, type or what you own, and add cards straight into your pool. The deck tab builds from that pool, and when you cut a card it rebalances and shows you the new curve.
+
+<figure><video src="/images/work/prerift-builder/prerift-pool-to-deck.mp4" poster="/images/work/prerift-builder/prerift-pool-to-deck-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="The official riftbound.gg builder, with its rules panel and constructed-only format rules outlined. Then the Prerift Builder on a phone: searching the pool for Riven and adding a copy, filtering to Fury cards in the pool, opening the pool board, and cutting a card from the 25-card deck as the curve rebalances."></video><figcaption>The official builder keeps the rules in a side panel. Prerift Builder builds them into searching, filtering and moving cards from Pool to Deck.</figcaption></figure>
+
+---
+
+## Sort your pool without touching your cards
+
+At an event, your table is a pile of freshly opened cards. In the tool, your pool stacks in the bottom-right corner. Hover the stack and it fans out, select it to open your whole pool, then apply Auto-sort by type, color, energy cost or power cost. You can pre-sort your cards in the software without re-sorting your physical cards, which makes it much easier to understand what you're working with.
+
+<figure><video src="/images/work/prerift-builder/prerift-organize-pool.mp4" poster="/images/work/prerift-builder/prerift-organize-pool-poster.webp" width="1920" height="1080" autoplay muted loop playsinline controls aria-label="Adding a card to the pool, hovering the card stack in the bottom-right corner so it fans out, opening the pool, and applying Auto-sort by color as the cards fly into sections for each domain."></video><figcaption>Add cards, open the stack, auto-sort by color.</figcaption></figure>
+
 ---
 
 ## Design for someone who's never played
